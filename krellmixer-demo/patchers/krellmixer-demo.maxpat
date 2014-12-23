@@ -9,7 +9,8 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 199.0, 206.0, 436.0, 478.0 ],
+		"rect" : [ 492.0, 255.0, 387.0, 274.0 ],
+		"bgcolor" : [ 0.239216, 0.254902, 0.278431, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -38,14 +39,15 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
-					"filename" : "Yedikule:/Users/nick/Desktop/krellmixer.js",
+					"filename" : "krellmixer.js",
 					"id" : "obj-1",
+					"jsarguments" : [ 6, 4 ],
 					"maxclass" : "jsui",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 75.0, 70.0, 64.0, 64.0 ]
+					"patching_rect" : [ 15.0, 20.0, 345.0, 235.0 ]
 				}
 
 			}
@@ -53,8 +55,8 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "krellmixer.js",
-				"bootpath" : "~/Desktop",
-				"patcherrelativepath" : "../../../../../Desktop",
+				"bootpath" : "~/GITHUB/cassiel/krellmixer/krellmixer-demo/code",
+				"patcherrelativepath" : "../code",
 				"type" : "TEXT",
 				"implicit" : 1
 			}

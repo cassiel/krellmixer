@@ -61,7 +61,9 @@ var KNOB_OFF_REGION = 0.01;
 
 //	Divide ins from outs in arguments
 
-var NAME_DIVIDER = "//"
+// TODO: are these (legends) still used?
+
+var NAME_DIVIDER = "//";
 
 var NAME_IN = "IN";
 var NAME_OUT = "OUT";
@@ -448,7 +450,8 @@ function drawCell(sk, colour, proportion, highlight, numeric00) {
 	tint(NEEDLE_COLOUR);
 	needle(sk, proportion);
 
-	if (highlight) {
+    // Testing... although I like more permanence to the digits:
+	if (numeric00 != "off" /*highlight*/) {
 		//tint(HIGHLIGHT_COLOUR);
 		//ring(sk, 0, 0);
 
