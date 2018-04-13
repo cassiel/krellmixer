@@ -1,6 +1,8 @@
 /*	-*- tab-width: 4; -*- */
 
-/*	A graphical display of a mixing matrix. Every matrix position has a control for
+/*	Krell Mixer UI, ca. 2008.
+
+    A graphical display of a mixing matrix. Every matrix position has a control for
 	setting gain/attenuation, with post-fade audio monitoring (all calculated/rendered
 	in dB). The matrix takes lists of floats as input (audio levels, probably from
 	peakamp~) and outputs commands for a matrix~ object.
@@ -43,7 +45,7 @@ function KRELL_CELL(xn, yn) {
 
 //	Manifest constants.
 
-var MYGLOBAL = "$RCSfile: q4mix.Matrix.js,v $";
+var MYGLOBAL = "cassiel.krellmixer.GLOBAL";
 
 var FONTSIZE = 14;
 var FONTNAME = "Georgia";
@@ -255,7 +257,8 @@ function announce() {
 	var g = new Global(MYGLOBAL);
 
 	if (g.announced === undefined) {
-		post("Mix Matrix $Id: q4mix.Matrix.js,v 1.18 2006/08/12 18:14:03 todor Exp $\n");
+		post("| cassiel.krellmixer");
+		post("| nick rothwell, nick@cassiel.com / http://cassiel.com");
 		g.announced = true;
 	}
 }
