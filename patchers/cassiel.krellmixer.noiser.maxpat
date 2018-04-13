@@ -277,9 +277,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
-					"patching_rect" : [ 195.0, 375.0, 90.0, 20.0 ],
+					"patching_rect" : [ 195.0, 375.0, 97.0, 20.0 ],
 					"style" : "",
-					"text" : "peakamp~ 50"
+					"text" : "peakamp~ 100"
 				}
 
 			}

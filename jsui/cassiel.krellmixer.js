@@ -39,7 +39,8 @@ function KRELL_CELL(xn, yn) {
 	this.sprites00 = null;				//	No sprites for a setting of 0.
 	this.lastInLevel = 0;				//	Last input level prior to mixing.
 		//	TODO: since lastInLevel is prefade, we should just hold one value
-		//	per column (not one per cell).
+	//	per column (not one per cell).
+    this.db00 = null;
 	this.multiplier = 0;				//	Attenuation multiplication value.
 	this.colourIndex = 0;
 }
@@ -48,7 +49,7 @@ function KRELL_CELL(xn, yn) {
 
 var MYGLOBAL = "cassiel.krellmixer.GLOBAL";
 
-var FONTSIZE = 14;
+var FONTSIZE = 24;
 var FONTNAME = "Georgia";
 
 var CELL_SIZE = 0.7;		//	Assumed within a sub-sketch.
@@ -79,7 +80,7 @@ var SINGLE_OUT = [NAME_OUT];
 var CELL_OFF = new COLOUR(0.6, 0.6, 0.6);
 var PANEL_BG = new COLOUR(0.3, 0.3, 0.3);		//	Background colour
 var DOT_COLOUR = new COLOUR(1, 1, 1);			//	Central dot
-var TEXT_COLOUR = new COLOUR(1, 1, 1);			//	dB text
+var TEXT_COLOUR = new COLOUR(0, 0, 0);			//	dB text
 var HIGHLIGHT_COLOUR = new COLOUR(1, 1, 1);		//	Highlight ring
 var NEEDLE_COLOUR = new COLOUR(0, 0, 0);		//	Needle
 
@@ -171,14 +172,14 @@ function genSpriteSketch() {
 /**	Generate an array of sprites, across the colours, for a particular setting. */
 
 genSprites.local = true;
-function genSprites(setting) {
+function genSprites(setting, db00) {
 	var a = new Array(NUM_LEVELS);
 
 	for (var i = 0; i < NUM_LEVELS; i++) {
 		var sk = genSpriteSketch();
 		//	Y in both cases: all our scalings are relative to vertical pitch.
 
-		drawCell(sk, LEVEL_COLOURS[i].colour, setting, false, null);
+		drawCell(sk, LEVEL_COLOURS[i].colour, setting, db00);
 		a[i] = sk;
 	}
 
@@ -190,7 +191,7 @@ function genSprites(setting) {
 genOffSprite.local = true;
 function genOffSprite() {
 	var sk = genSpriteSketch();
-	drawCell(sk, CELL_OFF, 0, false, null);
+	drawCell(sk, CELL_OFF, 0, null);
 	return sk;
 }
 
@@ -399,7 +400,7 @@ function slice(sk, proportion) {
 
 	//setColour(sk, 1, 1);
 	//sk.framecircle(CELL_SIZE);
-	setColour(sk, 1, 1);
+	setColour(sk, 1, 0.8);
 	//	Coordinate system seems to be: 0 is X +ve, growing anticlockwise (to top).
 	//sk.circle(CELL_SIZE, base - 180 * proportion, base + 180 * proportion);
 	sk.circle(CELL_SIZE, knobAngle(0), knobAngle(proportion));
@@ -445,7 +446,8 @@ function legend(sk, text, x, y) {
 /*	Clear and draw a cell at OpenGL position (x, y). */
 
 drawCell.local = true;
-function drawCell(sk, colour, proportion, highlight, numeric00) {
+function drawCell(sk, colour, proportion, numeric00) {
+    // post("drawCell(" + numeric00 + ")\n");
 	clearCell(sk);
 
 	tint(colour);
@@ -460,7 +462,9 @@ function drawCell(sk, colour, proportion, highlight, numeric00) {
 		//ring(sk, 0, 0);
 
 		tint(TEXT_COLOUR);
-		legend(sk, String(numeric00), 0, 0);
+        str = Math.round(numeric00);
+        if (str > 0) { str = "+" + str; }
+		legend(sk, String(str), 0, 0);
 	} else {
 		tint(DOT_COLOUR);
 		dot(sk, 0, 0, 1);
@@ -534,7 +538,7 @@ function drawLive(cell, highlight) {
 	//	Y in both cases: all our scalings are relative to vertical pitch.
 
 	var db = dbText(setting2db00(cell.setting));
-	drawCell(sk, LEVEL_COLOURS[cell.colourIndex].colour, cell.setting, highlight, db);
+	drawCell(sk, LEVEL_COLOURS[cell.colourIndex].colour, cell.setting, db);
 
 	var pos = getTopLeft(cell.xn, cell.yn);
 	var spritePos = pixelCoords(pos.x, pos.y);
@@ -624,6 +628,7 @@ function setCellAndMatrix(cell, f) {
 	cell.setting = f;
 
 	var db00 = setting2db00(f);
+    cell.db00 = db00;
 
 	if (db00 == null) {
 		cell.multiplier = 0;
@@ -644,7 +649,7 @@ function rebuildSprites(cell) {
 	}
 
 	if (cell.setting > KNOB_OFF_REGION) {
-		cell.sprites00 = genSprites(cell.setting);
+		cell.sprites00 = genSprites(cell.setting, cell.db00);
 	} else {
 		cell.sprites00 = null;
 	}
