@@ -1,6 +1,6 @@
 /*	-*- tab-width: 4; -*- */
 
-/*	Krell Mixer UI, ca. 2008.
+/*	Krell Mixer UI, ca. 2006.
 
     A graphical display of a mixing matrix. Every matrix position has a control for
 	setting gain/attenuation, with post-fade audio monitoring (all calculated/rendered
@@ -84,18 +84,20 @@ var TEXT_COLOUR = new COLOUR(0, 0, 0);			//	dB text
 var HIGHLIGHT_COLOUR = new COLOUR(1, 1, 1);		//	Highlight ring
 var NEEDLE_COLOUR = new COLOUR(0, 0, 0);		//	Needle
 
-var NUM_LEVELS = 4;
-
 /**	An array of regions of dB levels (actually, audio levels) for determining
 	colour index. We do a linear interpolation here, which is not very efficient
 	but hopefully not too much of an overhead for a small number of colours. */
 
 var LEVEL_COLOURS = [
 	{low: 0, colour: CELL_OFF},
-	{low: db2ampl(-40), colour: new COLOUR(0.1, 0.9, 0.0)},
-	{low: db2ampl(-12), colour: new COLOUR(0.9, 0.8, 0.2)},
+	{low: db2ampl(-36), colour: new COLOUR(0.1, 0.9, 0.0)},
+	{low: db2ampl(-27), colour: new COLOUR(0.5, 0.85, 0.1)},
+	{low: db2ampl(-18), colour: new COLOUR(0.9, 0.8, 0.2)},
+	{low: db2ampl(-9), colour: new COLOUR(1.0, 0.5, 0.3)},
 	{low: db2ampl(0), colour: new COLOUR(1.0, 0.0, 0.0)}
 ];
+
+var NUM_LEVELS = LEVEL_COLOURS.length;
 
 //	A format tag for pattr.
 
@@ -259,8 +261,8 @@ function announce() {
 	var g = new Global(MYGLOBAL);
 
 	if (g.announced === undefined) {
-		post("| cassiel.krellmixer");
-		post("| nick rothwell, nick@cassiel.com / http://cassiel.com");
+		post("| cassiel.krellmixer\n");
+		post("| nick rothwell, nick@cassiel.com / http://cassiel.com\n");
 		g.announced = true;
 	}
 }
