@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 327.0, 1179.0, 771.0, 659.0 ],
+		"rect" : [ 327.0, 1179.0, 804.0, 659.0 ],
 		"bgcolor" : [ 0.239216, 0.254902, 0.278431, 1.0 ],
 		"editing_bgcolor" : [ 0.32549, 0.345098, 0.372549, 1.0 ],
 		"bglocked" : 0,
@@ -39,6 +39,36 @@
 		"style" : "cassiel",
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"bubble" : 1,
+					"id" : "obj-21",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 540.0, 390.5, 96.0, 34.0 ],
+					"style" : "",
+					"text" : "Mixed outputs"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bubble" : 1,
+					"bubblepoint" : 0.0,
+					"bubbleside" : 0,
+					"id" : "obj-19",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 615.0, 255.0, 150.0, 49.0 ],
+					"style" : "",
+					"text" : "matrix~ does the actual audio work"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-16",
 					"maxclass" : "meter~",
@@ -257,7 +287,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 253.0, 221.0, 156.0, 58.0 ],
+					"patching_rect" : [ 240.0, 221.0, 150.0, 58.0 ],
 					"style" : "",
 					"text" : "Feed with a list of amplitude values (1.0 == 0dB)"
 				}
@@ -294,6 +324,7 @@
 			}
 , 			{
 				"box" : 				{
+					"border" : 0,
 					"filename" : "cassiel.krellmixer.js",
 					"id" : "obj-1",
 					"jsarguments" : [ 6, 4 ],
@@ -317,7 +348,9 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.92549, 0.364706, 0.341176, 0.9 ],
 					"destination" : [ "obj-13", 0 ],
+					"midpoints" : [ 54.5, 535.0, 398.5, 535.0, 398.5, 210.0, 534.5, 210.0 ],
 					"order" : 0,
 					"source" : [ "obj-1", 0 ]
 				}

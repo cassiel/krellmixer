@@ -17,6 +17,7 @@
 
 	TODO:
 		- Swatch input methods for Stevie.
+        - Remove the scribble-strip machinery - we have textbrick for that now.
  */
 
 autowatch = 0;
@@ -454,7 +455,7 @@ function drawCell(sk, colour, proportion, highlight, numeric00) {
 	needle(sk, proportion);
 
     // Testing... although I like more permanence to the digits:
-	if (numeric00 != "off" /*highlight*/) {
+	if (numeric00 != null) {
 		//tint(HIGHLIGHT_COLOUR);
 		//ring(sk, 0, 0);
 
@@ -586,7 +587,7 @@ function setting2db00(setting) {
 
 function dbText(db00) {
 	if (db00 == null) {
-		return "off";
+		return null;
 	} else {
 		var i = Math.round(db00);
 
